@@ -106,7 +106,7 @@ a:hover {
   box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
 }
 
-img {
+.img-1 {
   width: 200px;
   margin: 2rem;
   animation: fadeIn 1.5s ease forwards;
