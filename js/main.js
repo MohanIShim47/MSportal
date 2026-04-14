@@ -1,81 +1,60 @@
-const canvas = document.getElementById("stars");
+function openSite(url) {
+  window.open(url, "_blank");
+}
+
+const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-let stars = [];
-const STAR_COUNT = 100;
-const MAX_DISTANCE = 120;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: (Math.random() - 0.5) * 0.5,
+  });
 }
-window.addEventListener("resize", resize);
-resize();
 
-class Star {
-  constructor() {
-    this.reset();
-  }
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = (Math.random() - 0.5) * 0.3;
-    this.size = Math.random() * 2 + 1;
-  }
+  for (let p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
 
-  move() {
-    this.x += this.vx;
-    this.y += this.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-      this.reset();
-    }
-  }
-
-  draw() {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = "#38bdf8";
+    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = "#5fd4ff";
     ctx.fill();
-  }
-}
 
-for (let i = 0; i < STAR_COUNT; i++) {
-  stars.push(new Star());
-}
+    for (let p2 of particles) {
+      let dx = p.x - p2.x;
+      let dy = p.y - p2.y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
 
-function drawLines() {
-  for (let i = 0; i < stars.length; i++) {
-    for (let j = i + 1; j < stars.length; j++) {
-      const dx = stars[i].x - stars[j].x;
-      const dy = stars[i].y - stars[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < MAX_DISTANCE) {
+      if (dist < 120) {
         ctx.beginPath();
-        ctx.moveTo(stars[i].x, stars[i].y);
-        ctx.lineTo(stars[j].x, stars[j].y);
-        ctx.strokeStyle = `rgba(56,189,248, ${1 - dist / MAX_DISTANCE})`;
-        ctx.lineWidth = 0.5;
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = "rgba(95,212,255,0.1)";
         ctx.stroke();
       }
     }
   }
+
+  requestAnimationFrame(draw);
 }
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+draw();
 
-  stars.forEach(star => {
-    star.move();
-    star.draw();
-  });
-
-  drawLines();
-
-  requestAnimationFrame(animate);
-}
-
-animate();
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});

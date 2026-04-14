@@ -1,25 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Nethera</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nethera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/nethera.png">
   </head>
   <body>
-    <canvas id="stars"></canvas>
+    <canvas id="bg"></canvas>
     <div class="container">
-      <h1>Nethera</h1>
-      <hr />
-      <h2>Websites</h2>
-      <a href="https://phipibeta.msportal.net/" >
-        PhiPiBeta
-      </a>
-      <a href="https://Haven.msportal.net">
-        Pixel Haven
-      </a>
-      <hr>
-      <p>Made for complete testing and learning to work with website and other stuff!</p>
+      <div class="card">
+        <img src="img/nethera.png" alt="netera-logo">
+        <h1>Nethera</h1>
+        <div class="tagline">Your personal hub for tools</div>
+        <hr>
+        <div class="buttons">
+          <div class="btn" onclick="openSite('https://phipibeta.msportal.net')">PhiPiBeta</div>
+          <div class="btn" onclick="openSite('https://haven.msportal.net')">Pixel Haven</div>
+        </div>
+        <hr>
+        <div class="footer">Fast access. Clean workflow.</div>
+      </div>
     </div>
     <script src="js/main.js"></script>
   </body>
