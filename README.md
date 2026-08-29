@@ -13,10 +13,6 @@
 
 ---
 
-## PhiPiBeta Foundation
-
-This repo is private repo made by the PhiPiBeta foundation and cann't and shouldn't be accessed by the Public. If you are not a authorized viewer of this repo and somehow got here, I suggest you leave right now.
-
 ## Background
 
 Nethera was made at first for just to host my website, but then transformed into a hub for cool websites made by the PhiPiBeta Foundation.
